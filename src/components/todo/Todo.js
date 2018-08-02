@@ -14,7 +14,9 @@ export class Todo extends Component {
 
         return (
             <div key={id} className="Todo__item">
-                <p>{title}</p>
+                <p style={{ 
+                        textDecoration: completed ? 'line-through' : 'none' 
+                    }}>{title}</p>
             </div>
         );
     }

@@ -28,4 +28,6 @@
   justify-content: center; }
 
 .Todo__item {
-  border: 1px solid gray; }
+  border: 1px solid gray; 
+  padding: 1rem;
+}
