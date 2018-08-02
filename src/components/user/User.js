@@ -25,7 +25,7 @@ export class User extends Component {
         } = this.props;
 
         return (
-            <Link to={`/detail/${id}`} className="card">
+            <Link to={`/user/${id}`} className="card">
             <div key={id} className="User__item">
                 <h1>{username}</h1>
             </div>

@@ -7,6 +7,7 @@ import './App.css';
 //import { Detail } from './pages/Detail';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { UserPage } from './pages/UserPage';
 
 class App extends Component {
   render() {
@@ -14,7 +15,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path='/' component={Home} />
-          {/* <Route path='/detail/:id' component={Detail} /> */}
+          <Route path='/user/:id' component={UserPage} /> 
           <Route component={NotFound} />
         </Switch>
         

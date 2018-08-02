@@ -21,7 +21,8 @@ export class UserList extends Component{
         return this.state.users.map((user) => {
             return (
             <div key={user.id} className="User">
-                <User                   
+                <User   
+                    id={user.id}                 
                     name={user.name}
                     username={user.username}
                     email={user.email}
