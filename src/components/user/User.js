@@ -21,13 +21,14 @@ export class User extends Component {
             address,
             phone,
             website,
-            company
+            company,
+            name
         } = this.props;
 
         return (
             <Link to={`/user/${id}`} className="card">
             <div key={id} className="User__item">
-                <h1>{username}</h1>
+                <h1>{name}</h1>
             </div>
             </Link>
         );

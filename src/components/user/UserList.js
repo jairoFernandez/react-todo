@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { USERS_URL } from "../../utils/Constants";
 import { User } from './User';
+import { Loading } from '../Loading';
 
 export class UserList extends Component{
     state = {
@@ -39,7 +40,7 @@ export class UserList extends Component{
         return(
             <div className="UserList">
                 {this.state.users.length === 0
-                    ? <h1>Cargando usuarios...</h1>
+                    ? <Loading />
                     : this._renderUsers()
                 }
             </div>

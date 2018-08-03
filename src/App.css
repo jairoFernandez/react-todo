@@ -23,11 +23,51 @@
   padding: 1rem;
 }
 
-.Todo {
+.UserPage__container{
   display: flex;
-  justify-content: center; }
+  flex-direction: column;
+}
 
-.Todo__item {
-  border: 1px solid gray; 
+.UserPage__item{
+  border: 1px solid red;
+  flex-grow: 1;
   padding: 1rem;
+}
+
+.UserPage__item .info{
+
+}
+
+
+@media screen and (min-width: 768px){
+  .UserPage__container{
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .todos{
+      display: flex;
+      flex-direction: column; 
+      flex-grow: 1;
+      justify-content: center; 
+  }
+}
+
+.Todo{
+  display: flex;
+  justify-content: center;
+}
+
+.Todo .Todo__item{
+  border: 1px solid lightgray; 
+  padding: .5rem;
+  flex-grow: 1;
+  border-radius: 5px;
+  margin: 2px;
+  box-shadow: 5px 5px #c7c7c7; 
+}
+
+svg path,
+svg rect{
+  fill: #FF6700;
 }
