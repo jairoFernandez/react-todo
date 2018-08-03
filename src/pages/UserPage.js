@@ -66,10 +66,9 @@ export class UserPage extends Component {
 
     render() {
         return (
-            <div className="UserPage">
+            <div className="UserPage animated bounceInUp">
                 <ButtonBackToHome />
-                <h1>User page</h1>
-                
+                                
                 <div className="UserPage__container">
                     <div className="UserPage__item info">
                         { this.state.user.name === undefined
