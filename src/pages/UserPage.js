@@ -4,6 +4,7 @@ import { ButtonBackToHome } from "../components/ButtonBackHome";
 import { Todo } from "../components/todo/Todo";
 import { TODOS_URL, USERS_URL } from '../utils/Constants';
 import { Loading } from '../components/Loading';
+import { UserProfile } from "../components/user/UserProfile";
 
 export class UserPage extends Component {
     static propTypes = {
@@ -18,7 +19,7 @@ export class UserPage extends Component {
     state = { todos: [], user: {} }
 
     _fetchTodos({ id }) {
-        fetch(`${TODOS_URL}?userId=${id}`)
+        fetch(`${USERS_URL}/${id}/todos`)
             .then(res => res.json())
             .then(todos => {
                 this.setState({ todos });
@@ -29,15 +30,16 @@ export class UserPage extends Component {
         fetch(`${USERS_URL}?id=${id}`)
             .then(res => res.json())
             .then(user => {
-                console.log(user)
                 this.setState({ user: user[0] });
             });
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const { id } = this.props.match.params;
         this._fetchTodos({ id });
         this._fetchInfoUser({ id });
+        
     }
 
     _renderTodos = () => {
@@ -51,18 +53,7 @@ export class UserPage extends Component {
                     />
                 </div>)
         })
-    }
-
-    _renderInfoUser(){
-        const { name, website } = this.state.user;
-        const url = `https://${website}`;
-        return (
-            <div className="Profile">
-                <h1>{name}</h1>
-                <small> <i className="fa fa-globe"></i> <a target="_blank" href={url}>{url}</a></small>
-            </div>
-        )
-    }
+    } 
 
     render() {
         return (
@@ -73,7 +64,7 @@ export class UserPage extends Component {
                     <div className="UserPage__item info">
                         { this.state.user.name === undefined
                             ? <Loading />
-                            : this._renderInfoUser()
+                            : <UserProfile user={this.state.user} />
                         }
                     </div>
                     <div className="UserPage__item todos">
