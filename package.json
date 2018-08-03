@@ -14,6 +14,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-transition-group": "^2.4.0",
+    "redux": "^4.0.0",
     "simple-react-google-maps": "^1.1.1"
   },
   "scripts": {
@@ -25,6 +26,7 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0"
+    "gh-pages": "^1.2.0",
+    "redux-immutable-state-invariant": "^2.1.0"
   }
 }
