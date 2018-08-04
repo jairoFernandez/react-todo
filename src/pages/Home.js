@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { UserList } from '../components/user/UserList';
 import { connect } from "react-redux";
-import * as userActions from '../actions/userAction';
+import * as userActions from '../actions/userActions';
 
 class Home extends Component {
 
@@ -16,9 +16,13 @@ class Home extends Component {
         user.name = event.target.value;
         this.setState({ user })
     }
+    
+    userRow = (user, index) => {
+        return <div key={index}>{user.name}</div>
+    }
 
     onClickSave= () => {
-        this.props.dispatch(userActions.createUser(this.state.user));
+        this.props.createUser(this.state.user);
     }
 
     render() {
@@ -40,6 +44,9 @@ class Home extends Component {
                     />
                 </div>
                 <hr/>
+                
+                { this.props.usersdemo.map(this.userRow) }
+                
                 <UserList />
             </div>
         );
@@ -48,12 +55,14 @@ class Home extends Component {
 
 function mapStateToProps(state, ownProps){
     return {
-        users: state.users
+        usersdemo: state.users
     }
 }
 
-function mapDispatchToProps(){
-
+function mapDispatchToProps(dispatch){
+    return {
+        createUser: user => dispatch(userActions.createUser(user))
+    }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
