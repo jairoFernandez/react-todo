@@ -2,24 +2,21 @@ import React, { Component } from 'react';
 import { USERS_URL } from "../../utils/Constants";
 import { User } from './User';
 import { Loading } from '../Loading';
+import { connect } from 'react-redux';
+import { actionListUsers } from '../../redux/actions/userActions'
 
-export class UserList extends Component{
-    state = {
-        users: []
-    }
+class UserList extends Component{
 
     componentDidMount() {
-        this._listUsers();
+        this._obtainUsers();
     }
 
-    _listUsers= () => {
-        fetch(`${USERS_URL}`).then(res => res.json()).then(results => {
-            this.setState({ users: results })
-        });
+    _obtainUsers = () => {
+        this.props.obtainUsers();
     }
 
     _renderUsers = () => {
-        return this.state.users.map((user) => {
+        return this.props.users.map((user) => {
             return (
             <div key={user.id} className="User">
                 <User   
@@ -39,7 +36,7 @@ export class UserList extends Component{
     render(){
         return(
             <div className="UserList">
-                {this.state.users.length === 0
+                {this.props.users.length === 0
                     ? <Loading />
                     : this._renderUsers()
                 }
@@ -47,3 +44,22 @@ export class UserList extends Component{
         );
     };
 }
+
+const mapStateToProps = (state) => {
+    const { userReducer } = state;
+    return {
+        users: userReducer.users
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        obtainUsers: () => {
+            fetch(`${USERS_URL}`).then(res => res.json()).then(results => {                
+                dispatch(actionListUsers(results));
+            });
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserList);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { UserList } from '../components/user/UserList';
+import UserList from '../components/user/UserList';
 import { connect } from "react-redux";
-import * as userActions from '../actions/userActions';
+import * as userActions from '../redux/actions/userActions';
 
 class Home extends Component {
 
@@ -45,7 +45,7 @@ class Home extends Component {
                 </div>
                 <hr/>
                 
-                { this.props.usersdemo.map(this.userRow) }
+                {/* { this.props.usersdemo.map(this.userRow) } */}
                 
                 <UserList />
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'
-import configureStore from "./store/configureStore";
+import configureStore from "./redux/store/configureStore";
 //import todoApp from './redux/reducers';
 
 import './index.css';
