@@ -28,7 +28,6 @@ class UserPage extends Component {
       this.props.obtainInfoUser(id, this.props.history);
     } else {
       this.props.obtainInfoUserCache(userCache[0]);
-      console.log(this.props.user);
     }
   }
 
