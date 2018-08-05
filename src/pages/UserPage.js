@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { ButtonBackToHome } from "../components/ButtonBackHome";
 import { Todo } from "../components/todo/Todo";
-import { TODOS_URL, USERS_URL } from "../utils/Constants";
+import { USERS_URL } from "../utils/Constants";
 import { Loading } from "../components/Loading";
 import { UserProfile } from "../components/user/UserProfile";
 
@@ -13,6 +12,8 @@ import {
   actionObtainInfoCache
 } from "../redux/actions/userActions";
 
+import { Redirect } from "react-router-dom";
+
 class UserPage extends Component {
   _fetchTodos({ id }) {
     this.props.obtainTodos(id);
@@ -22,12 +23,12 @@ class UserPage extends Component {
     let userCache = this.props.users.filter(elemento => {
       return elemento.id.toString() === id;
     });
-    
+
     if (userCache.length === 0) {
-        this.props.obtainInfoUser(id);
+      this.props.obtainInfoUser(id, this.props.history);
     } else {
       this.props.obtainInfoUserCache(userCache[0]);
-      console.log(this.props.user)
+      console.log(this.props.user);
     }
   }
 
@@ -59,7 +60,8 @@ class UserPage extends Component {
 
         <div className="UserPage__container">
           <div className="UserPage__item info">
-            {this.props.user.name === undefined ? (
+            {this.props.user !== undefined &&
+            Object.keys(this.props.user).length === 0 ? (
               <Loading />
             ) : (
               <UserProfile user={this.props.user} />
@@ -93,11 +95,18 @@ const mapDispatchToProps = dispatch => {
           dispatch(actionObtainTodosByUser(todos));
         });
     },
-    obtainInfoUser: idUser => {
+    obtainInfoUser: (idUser, history) => {
       fetch(`${USERS_URL}?id=${idUser}`)
         .then(res => res.json())
-        .then(user => {
+        .then(user => {          
+          if (user.length === 0) {
+            console.log("Usuario no encontrado")
+            history.push("/not-found");
+          }
           dispatch(actionObtainInfo(user[0]));
+        })
+        .catch(err => {
+          return <Redirect to='/error-page'  />
         });
     },
     obtainInfoUserCache: user => {

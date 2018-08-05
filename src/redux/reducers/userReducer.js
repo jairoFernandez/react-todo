@@ -10,7 +10,8 @@ export default function userReducer(
 
   switch (action.type) {
     case "CREATE_USER":
-      return [...state, Object.assign({}, action.user)];
+      _state.users = state.users.concat([action.user]); //[...state, Object.assign({}, action.user)];
+      return _state;
     case "LIST_USERS":
       _state.users = action.users;
       return _state;
@@ -18,8 +19,8 @@ export default function userReducer(
       _state.todos = action.todos;
       return _state;
     case "INFO_USER":
-        _state.user = action.user;
-        return _state;
+      _state.user = action.user;
+      return _state;
     default:
       return state;
   }

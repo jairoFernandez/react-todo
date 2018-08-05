@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import GoogleMaps from "simple-react-google-maps"
 
-export class UserProfile extends Component{
-    
-    render(){
-        
+export class UserProfile extends Component{  
+
+    render(){        
         const { name, website, username, address, phone, email, company } = this.props.user;
-        let { lat, lng } = address.geo;
+        let { lat = "4.689329", lng = "-74.098792"  } = address.geo;
         lat = Number.parseFloat(lat);
         lng = Number.parseFloat(lng);
-        console.log(lat, lng)
+        
         const url = `https://${website}`;
 
         return(
