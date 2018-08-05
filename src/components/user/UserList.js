@@ -14,8 +14,6 @@ class UserList extends Component {
     let userCache = this.props.users;
     if (userCache.length === 0) {
       this.props.obtainUsers();
-    }else{
-        
     }
   };
 

@@ -1,22 +1,29 @@
 import React, { Component } from "react";
 import { ButtonBackToHome } from "../components/ButtonBackHome";
 import { Todo } from "../components/todo/Todo";
-import { USERS_URL } from "../utils/Constants";
+import { USERS_URL, TODOS_URL } from "../utils/Constants";
 import { Loading } from "../components/Loading";
 import { UserProfile } from "../components/user/UserProfile";
 
 import { connect } from "react-redux";
 import {
-  actionObtainTodosByUser,
   actionObtainInfo,
   actionObtainInfoCache
 } from "../redux/actions/userActions";
+
+import {
+  actionToggleTodo,
+  actionObtainTodosByUser
+} from "../redux/actions/todoActions";
 
 import { Redirect } from "react-router-dom";
 
 class UserPage extends Component {
   _fetchTodos({ id }) {
+    let todosCache = this.props.todos;
+    //if(todosCache.length === 0){
     this.props.obtainTodos(id);
+    //}
   }
 
   _fetchInfoUser({ id }) {
@@ -38,11 +45,17 @@ class UserPage extends Component {
     this._fetchTodos({ id });
   }
 
+  _handleCheckItem = event => {
+    this.props.toggleTodo(event.target.id, event.target.checked);
+  };
+
   _renderTodos = () => {
     return this.props.todos.map(todo => {
       return (
         <div key={todo.id} className="Todo">
           <Todo
+            handleCheckItem={this._handleCheckItem}
+            idTodo={todo.id}
             title={todo.title}
             userId={todo.userId}
             completed={todo.completed}
@@ -77,9 +90,10 @@ class UserPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { userReducer } = state;
+  const { userReducer, todoReducer } = state;
+
   return {
-    todos: userReducer.todos,
+    todos: todoReducer,
     user: userReducer.user,
     users: userReducer.users
   };
@@ -97,19 +111,38 @@ const mapDispatchToProps = dispatch => {
     obtainInfoUser: (idUser, history) => {
       fetch(`${USERS_URL}?id=${idUser}`)
         .then(res => res.json())
-        .then(user => {          
+        .then(user => {
           if (user.length === 0) {
-            console.log("Usuario no encontrado")
+            console.log("Usuario no encontrado");
             history.push("/not-found");
           }
           dispatch(actionObtainInfo(user[0]));
         })
         .catch(err => {
-          return <Redirect to='/error-page'  />
+          return <Redirect to="/error-page" />;
         });
     },
     obtainInfoUserCache: user => {
       dispatch(actionObtainInfoCache(user));
+    },
+    toggleTodo: (idTodo, checked) => {
+      fetch(`${TODOS_URL}/${idTodo}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          completed: checked
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+        .then(response => {
+          response.json();
+        })
+        .then(json => {
+          dispatch(actionToggleTodo(idTodo));
+          console.log(json)
+        });
+
     }
   };
 };

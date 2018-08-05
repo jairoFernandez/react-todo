@@ -27,7 +27,8 @@ export class TodoList extends Component {
         return this.state.todos.map((todo) => {
             return (
             <div key={todo.id} className="Todo">
-                <Todo                   
+                <Todo      
+                    idTodo={todo.id}             
                     title={todo.title}
                     userId={todo.userId}
                     completed={todo.completed}

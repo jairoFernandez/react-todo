@@ -3,6 +3,7 @@ import UserList from "../components/user/UserList";
 import { connect } from "react-redux";
 import * as userActions from "../redux/actions/userActions";
 import { USERS_URL } from "../utils/Constants";
+import UserForm from "../components/Form";
 
 class Home extends Component {
   state = {
@@ -24,8 +25,16 @@ class Home extends Component {
     this.setState({ user });
   };
 
-  onClickSave = () => {
-    this.props.createUser(this.state.user);
+  submit = values => {
+    let dataForm = Object.assign({}, values);
+    dataForm.id = Math.floor(Math.random() * 10000);
+    dataForm.address = {
+      geo: {}
+    };
+    dataForm.company = {
+      name: dataForm.companyName
+    };
+    this.props.createUser(dataForm);
   };
 
   render() {
@@ -34,16 +43,10 @@ class Home extends Component {
         <h1>TODO APP</h1>
         <div className="FormUsers">
           <h2>Add users</h2>
-          <input
-            type="text"
-            onChange={this.onNameChange}
-            value={this.state.user.name}
-          />
-
-          <input type="submit" value="Save" onClick={this.onClickSave} />
+          <UserForm onSubmit={this.submit} />
         </div>
         <hr />
-
+        <hr />
         <UserList />
       </div>
     );
@@ -71,7 +74,6 @@ function mapDispatchToProps(dispatch) {
         .then(json => {
           dispatch(userActions.createUser(json));
         });
-
     }
   };
 }

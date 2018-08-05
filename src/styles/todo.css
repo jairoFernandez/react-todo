@@ -1,0 +1,64 @@
+.Todo {
+    display: flex;
+    justify-content: center;
+}
+
+.Todo .Todo__item {
+    border: 1px solid lightgray;
+    padding: .5rem;
+    height: 30px;
+    flex-grow: 1;
+    border-radius: 5px;
+    margin: 2px;
+    box-shadow: 5px 5px #c7c7c7;
+}
+
+.Todo__item input[type="checkbox"]+label {
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+    padding: .1em;
+}
+
+.Todo__item input[type="checkbox"] {
+    display: none;
+}
+
+.Todo__item input[type="checkbox"]+label:before {
+    content: "\2714";
+    border: 0.1em solid #000;
+    border-radius: 0.2em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.2em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: .2s;
+}
+
+.Todo__item input[type="checkbox"] + label:active:before {
+    transform:scale(0);
+}
+
+.Todo__item input[type="checkbox"]:checked + label:before {
+    background-color: mediumseagreen;
+    border-color: mediumseagreen;
+    color: #fff;
+}
+
+.Todo__item input[type="checkbox"]:disabled + label:before {    
+    transform: scale(1);
+    border-color: #aaa;
+}
+
+.Todo__item input[type="checkbox"]:checked:disabled + label:before {
+    transform: scale(1);
+    background-color: #bfb;
+}
+
+.Todo__item:hover {
+    box-shadow: 5px 5px #575656;
+}

@@ -1,7 +1,6 @@
 export default function userReducer(
   state = {
     users: [],
-    todos: [],
     user: {}
   },
   action
@@ -14,10 +13,7 @@ export default function userReducer(
       return _state;
     case "LIST_USERS":
       _state.users = action.users;
-      return _state;
-    case "LIST_USERS_TODOS":
-      _state.todos = action.todos;
-      return _state;
+      return _state;    
     case "INFO_USER":
       _state.user = action.user;
       return _state;
