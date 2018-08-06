@@ -7,6 +7,7 @@ Librerías usadas:
 - react-router-dom
 - redux-form
 - redux-modal
+- react-toastify
 
 # Instrucciones instalación
 
@@ -22,9 +23,9 @@ Despliegue en github pages, se debe configurar la ruta en el package
 
 ```json
 { 
-  # ... #
+
   "homepage": "http://usuario.github.io/nombre-proyecto",
-  # ... #
+
 }
 ```
 

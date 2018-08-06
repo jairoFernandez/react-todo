@@ -20,6 +20,9 @@ import {
 
 import { Redirect } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 class UserPage extends Component {
   state = {
     todo: ""
@@ -56,7 +59,7 @@ class UserPage extends Component {
   };
 
   _handleDelete = id => {
-    this.props.deleteTodo(id);
+    this.props.deleteTodo(id, this.notify, this.notifyError);
   };
 
   _renderTodos = () => {
@@ -71,6 +74,7 @@ class UserPage extends Component {
             userId={todo.userId}
             completed={todo.completed}
           />
+          
         </div>
       );
     });
@@ -90,13 +94,16 @@ class UserPage extends Component {
       title: this.state.todo,
       userId: this.props.user.id
     };
-    this.props.addTodo(newTodo);
+    this.props.addTodo(newTodo, this.notify, this.notifyError);
     this.setState({ todo: "" });
   };
 
   _handleChangeNewTodo = (event) => {
     this.setState({ todo: event.target.value });
   }
+
+  notify = () => toast.success("Operación exitosa !");
+  notifyError = () => toast.error("Ha ocurrido un error inténtelo nuevamente !");
 
   render() {
     return (
@@ -131,6 +138,19 @@ class UserPage extends Component {
             {this.props.todos.length === 0 ? <Loading /> : this._renderTodos()}
           </div>
         </div>
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnVisibilityChange
+            draggable
+            pauseOnHover
+          />
+          {/* Same as */}
+          <ToastContainer />
       </div>
     );
   }
@@ -189,7 +209,7 @@ const mapDispatchToProps = dispatch => {
           dispatch(actionToggleTodo(idTodo));
         });
     },
-    addTodo: todo => {
+    addTodo: (todo, notify, notifyError) => {
       fetch(`${TODOS_URL}`, {
         method: "POST",
         body: JSON.stringify(todo),
@@ -202,13 +222,19 @@ const mapDispatchToProps = dispatch => {
         })
         .then(json => {
           dispatch(actionAddTodo(todo));
-        });
+          notify();
+        }).catch(()=>{
+          notifyError()
+        })
     },
-    deleteTodo: id => {
+    deleteTodo: (id, notify, notifyError) => {
       fetch(`${TODOS_URL}/${id}`, {
         method: "DELETE"
       }).then(() => {
         dispatch(actionDeleteTodo(id));
+        notify();
+      }).catch(()=>{
+        notifyError()
       });
     }
   };

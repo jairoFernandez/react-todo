@@ -27,8 +27,6 @@ export class User extends Component {
         let min = 0;
         const aleatorio = Math.round(Math.random() * (max - min) + min);// Math.floor(Math.random() * categories.length -1 );
 
-        console.log("Numero alet", aleatorio)
-
         return (
             <Link to={`/user/${id}`} className="card">
             <div key={id} className="User__item">

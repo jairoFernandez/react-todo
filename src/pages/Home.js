@@ -6,6 +6,9 @@ import { USERS_URL } from "../utils/Constants";
 import UserForm from "../components/Form";
 import Modal from "react-modal";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Modal.setAppElement('#userForm')
 
 const customStyles = {
@@ -58,6 +61,8 @@ class Home extends Component {
       name: dataForm.companyName
     };
     this.props.createUser(dataForm);
+    this.closeModal();
+    this.notify();
   };
 
   openModal = () => {
@@ -73,15 +78,30 @@ class Home extends Component {
     this.setState({ modalIsOpen: false });
   };
 
+  notify = () => toast.success("Operación exitosa !");
+
   render() {
+    
     return (
       <div className="animated bounceInUp">
-        
         <div className="FormUsers">
           <h1>TODO APP</h1>
           <h3 onClick={this.openModal} style={{ cursor: "pointer" }}>
             <i className="fa fa-plus" /> Add users
           </h3>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnVisibilityChange
+            draggable
+            pauseOnHover
+          />
+          {/* Same as */}
+          <ToastContainer />
         </div>
 
         <UserList />
@@ -121,6 +141,7 @@ function mapDispatchToProps(dispatch) {
         .then(response => response.json())
         .then(json => {
           dispatch(userActions.createUser(json));
+
         });
     }
   };
