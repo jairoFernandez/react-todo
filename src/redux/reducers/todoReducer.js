@@ -4,27 +4,26 @@ export default function todoReducer(state = [], action) {
   switch (action.type) {
     case "LIST_TODO_USER":
       _state = action.todos;
-      return _state;
+      return _state.reverse();
     case "TOGGLE_TODO":
       return state.map((todo, index) => {
-        if (todo.id ===  Number.parseInt(action.idTodo)) {
+        if (todo.id === Number.parseInt(action.idTodo)) {
           return Object.assign({}, todo, {
             completed: !todo.completed
           });
         }
         return todo;
       });
-
+    case "ADD_TODO":
+      _state = [...state, action.todo];
       return _state;
-    //   _state.todos.map((todo, index) => {
-    //     if (todo.id === Number.parseInt(action.idTodo)) {
-    //       return Object.assign({}, todo, {
-    //         completed: !todo.completed
-    //       });
-    //     }
-    //     return todo;
-    //   });
-    //   return _state;
+    case "DELETE_TODO":
+      _state = state.filter((todo, index) => {
+        if (todo.id !== Number.parseInt(action.id)) {
+          return todo;
+        }
+      });
+      return _state;
     default:
       return state;
   }

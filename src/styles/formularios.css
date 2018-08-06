@@ -1,0 +1,51 @@
+/*
+Campos
+*/
+input[type="text"]  {
+    padding: 16px 16px 16px 60px;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 10px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    width: 50%;
+}
+
+input[type="text"]:focus  {
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+/*Botones*/
+
+button {
+    font-size: 16px;
+    text-decoration: none;
+    color: dodgerblue;
+    border: 1px solid dodgerblue;
+    background-color: transparent;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    margin: 1px;
+    transition:background 1s, color 1s;
+}
+
+button:hover{
+    background-color: dodgerblue;
+    color: white;
+    cursor: pointer;
+}
+
+.button-back {
+    padding: 1rem;
+    display: flex;
+}
+
+.button-back a {
+    text-decoration: none;
+    border: 1px solid rgba(5, 88, 84, 0.562);
+    padding: 10px;
+    color: rgba(5, 46, 44, 0.562);
+}
+

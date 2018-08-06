@@ -13,12 +13,18 @@ import {
 
 import {
   actionToggleTodo,
-  actionObtainTodosByUser
+  actionObtainTodosByUser,
+  actionAddTodo,
+  actionDeleteTodo
 } from "../redux/actions/todoActions";
 
 import { Redirect } from "react-router-dom";
 
 class UserPage extends Component {
+  state = {
+    todo: ""
+  };
+
   _fetchTodos({ id }) {
     let todosCache = this.props.todos;
     //if(todosCache.length === 0){
@@ -49,12 +55,17 @@ class UserPage extends Component {
     this.props.toggleTodo(event.target.id, event.target.checked);
   };
 
+  _handleDelete = id => {
+    this.props.deleteTodo(id);
+  };
+
   _renderTodos = () => {
     return this.props.todos.map(todo => {
       return (
         <div key={todo.id} className="Todo">
           <Todo
             handleCheckItem={this._handleCheckItem}
+            handleDelete={this._handleDelete}
             idTodo={todo.id}
             title={todo.title}
             userId={todo.userId}
@@ -64,6 +75,28 @@ class UserPage extends Component {
       );
     });
   };
+
+  _addTodoHandler = event => {
+    this.setState({ todo: event.target.value });
+    if (event.key === "Enter") {
+      this._saveTodo();
+    }
+  };
+
+  _saveTodo = () => {
+    let newTodo = {
+      id: Math.floor(Math.random() * 99999),
+      completed: false,
+      title: this.state.todo,
+      userId: this.props.user.id
+    };
+    this.props.addTodo(newTodo);
+    this.setState({ todo: "" });
+  };
+
+  _handleChangeNewTodo = (event) => {
+    this.setState({ todo: event.target.value });
+  }
 
   render() {
     return (
@@ -81,6 +114,20 @@ class UserPage extends Component {
           </div>
           <div className="UserPage__item todos">
             <h2>List of todos ({this.props.todos.length})</h2>
+            <div>
+              <input
+                className="new-todo"
+                placeholder="Escriba aquí su tarea..."
+                type="text"
+                onChange={this._handleChangeNewTodo}
+                value={this.state.todo}
+                onKeyUp={this._addTodoHandler}
+              />
+              <button type="button" onClick={this._saveTodo}>
+                Agregar
+              </button>
+            </div>
+            <hr />
             {this.props.todos.length === 0 ? <Loading /> : this._renderTodos()}
           </div>
         </div>
@@ -140,9 +187,29 @@ const mapDispatchToProps = dispatch => {
         })
         .then(json => {
           dispatch(actionToggleTodo(idTodo));
-          console.log(json)
         });
-
+    },
+    addTodo: todo => {
+      fetch(`${TODOS_URL}`, {
+        method: "POST",
+        body: JSON.stringify(todo),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+        .then(response => {
+          response.json();
+        })
+        .then(json => {
+          dispatch(actionAddTodo(todo));
+        });
+    },
+    deleteTodo: id => {
+      fetch(`${TODOS_URL}/${id}`, {
+        method: "DELETE"
+      }).then(() => {
+        dispatch(actionDeleteTodo(id));
+      });
     }
   };
 };

@@ -66,11 +66,11 @@ let UserForm = props => {
       </div>
       <div>
         <label htmlFor="email">Email</label>
-        <Field name="email" component={renderField} type="email" />
+        <Field name="email" component={renderField} type="text" />
       </div>
       <div>
         <label htmlFor="phone">Phone</label>
-        <Field name="phone" component={renderField} type="phone" />
+        <Field name="phone" component={renderField} type="text" />
       </div>
       <div>
         <label htmlFor="website">Website</label>

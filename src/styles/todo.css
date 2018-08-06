@@ -6,11 +6,14 @@
 .Todo .Todo__item {
     border: 1px solid lightgray;
     padding: .5rem;
-    height: 30px;
+    height: 40px;
     flex-grow: 1;
+    text-align: left;
     border-radius: 5px;
     margin: 2px;
     box-shadow: 5px 5px #c7c7c7;
+    display: flex;
+    justify-content: space-between;
 }
 
 .Todo__item input[type="checkbox"]+label {
@@ -61,4 +64,21 @@
 
 .Todo__item:hover {
     box-shadow: 5px 5px #575656;
+}
+
+.btnEliminar{
+    float: right;
+    color: white;
+    background-color: rgb(236, 93, 93);
+    border-color: red;
+    border: 0px;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    border-radius: 2px;
+    z-index: 9999;
+}
+
+.btnEliminar:hover{
+    background-color: red;
 }

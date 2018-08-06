@@ -29,13 +29,13 @@ export class UserProfile extends Component{
                     </div>
                     <br/>
                     <div style={{borderRadius:"10px"}}>
-                        <GoogleMaps 
+                        {/* <GoogleMaps 
                             apiKey={"AIzaSyAQ_XE3MqBMlDuT2H0PzUz4BhDQWM-uejc"}
                             style={{height: "200px", width: "100%"}}
                             zoom={2}
                             center={{ lat, lng }}
                             markers={{ lat, lng }} //optional
-                        />
+                        /> */}
                     </div>
                 </div>
 

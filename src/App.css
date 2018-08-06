@@ -1,5 +1,6 @@
 @import "styles/efects.css";
 @import "styles/todo.css";
+@import "styles/formularios.css";
 
 .App {
     text-align: center;
@@ -93,14 +94,3 @@ svg rect {
     height: 100%;
 }
 
-.button-back {
-    padding: 1rem;
-    display: flex;
-}
-
-.button-back a {
-    text-decoration: none;
-    border: 1px solid rgba(5, 88, 84, 0.562);
-    padding: 10px;
-    color: rgba(5, 46, 44, 0.562);
-}
