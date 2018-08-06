@@ -1,17 +1,36 @@
-## TODO REACT
 
+# TODO APP
+=======================================
+Librerías usadas:
+- redux 
+- react-redux
+- react-router-dom
+- redux-form
+- redux-modal
 
-Agregar Redux
+# Instrucciones instalación
+
+### Desarrollo
 ```sh
-  yarn add redux react-redux
+  yarn install
+  yarn start
 ```
 
-Agregar React-Router
-```sh
-  yarn add react-router-dom
+### Producción 
+
+Despliegue en github pages, se debe configurar la ruta en el package 
+
+```json
+{ 
+  # ... #
+  "homepage": "http://usuario.github.io/nombre-proyecto",
+  # ... #
+}
 ```
 
-Agregar Redux-form
 ```sh
-  yarn add redux-form
+  yarn build
+  yarn deploy
 ```
+
+

@@ -5,7 +5,7 @@ export const ButtonBackToHome = () => (
   <div className='header'>
     <Link     
       to='/'>
-      <i className="fa fa-arrow-left"></i> Volver al inicio
+      <i className="fa fa-arrow-left"></i> Volver
     </Link>
   </div>
 )

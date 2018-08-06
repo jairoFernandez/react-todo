@@ -50,3 +50,33 @@ button:hover{
     color: white;
 }
 
+.btnEliminar{
+    float: right;
+    color: white;
+    background-color: rgb(236, 93, 93);
+    border-color: red;
+    border: 0px;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    border-radius: 2px;
+    z-index: 9999;
+}
+
+.btnEliminar:hover{
+    background-color: red;
+}
+
+.ReactModal__Overlay--after-open{
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.ReactModal__Content--after-open{
+    width: 80% !important;
+}
+
+@media screen and (min-width: 768px){
+    .ReactModal__Content--after-open{
+        width: 50% !important;
+    }
+}

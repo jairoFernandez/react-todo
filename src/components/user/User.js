@@ -17,17 +17,22 @@ export class User extends Component {
         const {
             id,
             username,
-            email,
-            address,
-            phone,
-            website,
-            company,
             name
         } = this.props;
+
+        const categories = [
+            "art", "nature", "art", "todo", "people", "friendly", "design", "office", "study", "future", "music", "technology", "sky","vision"]
+
+        let max = categories.length;
+        let min = 0;
+        const aleatorio = Math.round(Math.random() * (max - min) + min);// Math.floor(Math.random() * categories.length -1 );
+
+        console.log("Numero alet", aleatorio)
 
         return (
             <Link to={`/user/${id}`} className="card">
             <div key={id} className="User__item">
+            <img src={`https://source.unsplash.com/1600x900/?${categories[aleatorio]}`} alt="Avatar" style={{width: "100%"}} />
                 <h2>{name}</h2>
                 <small>@{username}</small>
             </div>

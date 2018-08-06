@@ -22,7 +22,8 @@ const customStyles = {
     content: {
       color: "lightsteelblue"
     },
-    textAlign: "center"
+    textAlign: "center",
+    width: "80%"
   }
 };
 
