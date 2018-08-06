@@ -4,6 +4,27 @@ import { connect } from "react-redux";
 import * as userActions from "../redux/actions/userActions";
 import { USERS_URL } from "../utils/Constants";
 import UserForm from "../components/Form";
+import Modal from "react-modal";
+
+// Modal.setAppElement('#userForm')
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "50%",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    overlay: {
+      backgroundColor: "black"
+    },
+    content: {
+      color: "lightsteelblue"
+    },
+    textAlign: "center"
+  }
+};
 
 class Home extends Component {
   state = {
@@ -12,7 +33,8 @@ class Home extends Component {
       id: 0,
       address: {},
       company: {}
-    }
+    },
+    modalIsOpen: false
   };
 
   onNameChange = event => {
@@ -37,17 +59,42 @@ class Home extends Component {
     this.props.createUser(dataForm);
   };
 
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
+
+  afterOpenModal = () => {
+    // references are now sync'd and can be accessed.
+    //this.subtitle.style.color = '#f00';
+  };
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
   render() {
     return (
       <div className="animated bounceInUp">
-        <h1>TODO APP</h1>
+        
         <div className="FormUsers">
-          <h2>Add users</h2>
-          <UserForm onSubmit={this.submit} />
+          <h1>TODO APP</h1>
+          <h3 onClick={this.openModal} style={{ cursor: "pointer" }}>
+            <i className="fa fa-plus" /> Add users
+          </h3>
         </div>
-        <hr />
-        <hr />
+
         <UserList />
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="User add"
+          ariaHideApp={false}
+        >
+          <h2>Agregar usuario</h2>
+          <UserForm onSubmit={this.submit} />
+        </Modal>
       </div>
     );
   }

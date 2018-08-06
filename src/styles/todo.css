@@ -1,12 +1,13 @@
 .Todo {
     display: flex;
     justify-content: center;
+    margin: 5px;
 }
 
 .Todo .Todo__item {
     border: 1px solid lightgray;
     padding: .5rem;
-    height: 40px;
+    min-height: 50px;
     flex-grow: 1;
     text-align: left;
     border-radius: 5px;

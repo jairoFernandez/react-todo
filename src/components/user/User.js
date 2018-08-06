@@ -29,6 +29,7 @@ export class User extends Component {
             <Link to={`/user/${id}`} className="card">
             <div key={id} className="User__item">
                 <h2>{name}</h2>
+                <small>@{username}</small>
             </div>
             </Link>
         );

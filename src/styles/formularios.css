@@ -9,12 +9,18 @@ input[type="text"]  {
     outline: none;
     padding: 8px;
     box-sizing: border-box;
-    width: 50%;
+    width: 100%;
 }
 
 input[type="text"]:focus  {
     border-color: dodgerblue;
     box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+@media screen and (min-width: 768px){
+    input[type="text"]{
+        width: 50%;
+    }
 }
 
 /*Botones*/
@@ -37,15 +43,10 @@ button:hover{
     cursor: pointer;
 }
 
-.button-back {
-    padding: 1rem;
-    display: flex;
-}
-
-.button-back a {
+.header a {
     text-decoration: none;
-    border: 1px solid rgba(5, 88, 84, 0.562);
+    border: 2px solid white;
     padding: 10px;
-    color: rgba(5, 46, 44, 0.562);
+    color: white;
 }
 

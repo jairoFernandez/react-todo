@@ -1,9 +1,27 @@
 @import "styles/efects.css";
 @import "styles/todo.css";
 @import "styles/formularios.css";
+@import "styles/modal.css";
 
 .App {
     text-align: center;
+}
+
+.header {
+    padding: 1rem;
+    display: flex;
+    background: linear-gradient(80deg, black, gray); 
+    color: white;
+    padding: 20px;
+    box-shadow: 5px 5px #888888;
+    position: relative;
+    width: 100%;
+    
+}
+
+.User{
+    margin: 1rem;
+    width: 200px;   
 }
 
 .UserList {
@@ -11,6 +29,8 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 @media screen and (min-width: 768px) {
@@ -28,7 +48,8 @@
     flex-grow: 1;
     border-radius: 5px;
     margin: 2px;
-    box-shadow: 5px 5px #c7c7c7;
+    box-shadow: 5px 5px #c7c7c7;   
+    min-height: 150px;
 }
 
 .User__item:hover {
@@ -94,3 +115,17 @@ svg rect {
     height: 100%;
 }
 
+.ReactModal__Overlay--after-open{
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.User{
+    text-decoration: none;
+}
+
+.FormUsers{
+    background: linear-gradient(80deg, black, gray); 
+    color: white;
+    padding: 20px;
+    box-shadow: 5px 5px #888888;
+}
